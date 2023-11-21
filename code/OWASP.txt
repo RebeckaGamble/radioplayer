@@ -1,0 +1,42 @@
+1. What is OWASP and what is its primary mission as described in the article?
+   - OWASP är en internationell ideell organisation för webbapllikationssäkerhet där de 
+     erbjuder material bestående av, dokumentation, videor och forum, lättillgängligt på sin webbplats. 
+     Deras mest kända projekt är OWASP Top 10 där de regelbundet uppdaterar en rapport över de 10 
+     mest kritiska riskerna gällande webbapllikationssäkerhet. De rekommenderar alla företag att 
+     införliva detta i sina arbeten. 
+
+2. Explain the concept of "Injection". Provide an example of how an injection 
+   attack could compromise a web application's security.
+   - Injection sker när opålitlig data skickas vid någon datainlämning, som formulär, till en webbapplikation.
+     Om en angripare anger SQL-databaskod i ett formulär med otillräcklig säkerhet, kan det resultera i att 
+     SQL-koden körs. Detta kan förhindras med validering, sanering eller att en databasadministratör ställer in 
+     kontroller för att minimera den information som en angripare skulle kunna få tillgång till. 
+
+3. Explain two strategies to prevent Broken Authentication vulnerabilities.
+    - Man kan begränsa eller fördröja antalet inloggningsförsök - med hjälp av Cloudflare's advanced rate limiting(avancerad hastighetsbegränsning)
+      som är integrerad med deras webbapplikationsbrandvägg WAF. Detta är en del av deras applikationssäkerhetsportfölj. 
+    - Man kan kräva tvåstegs autentisering - vilket kan innebära att man behöver ange användarnamn/lösenords verifiering och 
+      verifiering via SMS.
+   Detta för att förhindra stöld av inloggningsuppgifter till både användare och adminsitratörer. 
+
+4. Describe the potential consequences of Insecure Deserialization in web applications. 
+   How can developers protect against such attacks?
+   - En hacker kan manipulera koden som kommer/skickas tillbaka(som tex json) och inkludera skadlig kod, 
+     obehörig åtkomst och oönskat beteende. 
+     En utvecklare bör implementera säkra deserialiseringsmetoder med korrekt validering och input sanering 
+     för att försöka förhindra dessa attacker.
+
+4. Briefly define Cross-Site Scripting (XSS) as outlined in the article and list two methods 
+   suggested in the article to prevent XSS attacks in web applications.
+   - Det är en säkerhetsrisk som uppstår när webapplikationer tillåter användare att lägga till 
+     anpassad kod, vilket används i framförallt slutet på url:er eller på webbsidor som använder sig av olika forum 
+     där användare kan se vad andra skriver. Där kan hackers lägga in <script> taggar med kod som sedan körs i webbläsaren när 
+     andra användare går in på webbplatsen/följer en länk.
+     Det finns flera olika sätt att försöka förhindra XSS attacker, vilka man ska använda beror
+     på vad man har för innehåll på webbplatsen. 
+     React och Ruby on Rails har ett visst inbyggt XSS skydd.
+    * Validering av formulär där man sätter regler för vad som får och inte får skrivas(tex <script> taggar) i olika inputs.  
+      Text(tex namn) - inputs ska bara kunna innehålla text, ålder - siffror, 
+      mejl ska ha en viss ordningsföljd av tecken osv. 
+    * Ett annat sätt är att skapa regler för hur man hanterar cookies, tex kopplar dem till en viss IP-adress
+      eller att man helt enkelt blockerar JS att få tillgång till cookies.
